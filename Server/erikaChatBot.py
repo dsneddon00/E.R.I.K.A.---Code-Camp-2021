@@ -9,11 +9,21 @@ logger.setLevel(logging.CRITICAL)
 # Empatheticly Reciprocating Intelligent Konnection Agent
 #chatbot = ChatBot("ERIKA")
 
+# logic_adapters=["chatterbot.logic.BestMatch",
+#"chatterbot.logic.TimeLogicAdapter",
+#"chatterbot.logic.MathematicalEvaluation"]
 
 chatbot = ChatBot("Erika",
     storage_adapter="chatterbot.storage.SQLStorageAdapter",
     database_uri="sqlite:///erikaTraining.sqlite3",
-    logic_adapter=["chatterbot.logic.BestMatch"])
+    logic_adapters=[
+        {
+            "import_path": "chatterbot.logic.BestMatch",
+            "default_response": "I am sorry, but I do not understand what you are saying.",
+            "maximum_similarity_threshold": 0.90
+        }
+    ]
+    )
 
 conversation = [
     "Hello.",
@@ -21,7 +31,10 @@ conversation = [
     "How are you feeling today?",
     "I am well, thank you for asking.",
     "Is everything going well in your life?",
-    "I am your Empathecticly Reciprocating Intelligent Konnection Agent, or Erika for short."
+    "I am your Empathecticly Reciprocating Intelligent Konnection Agent, or Erika for short.",
+    "Remember, I am not a counselor, but I will do my best to make you feel better.",
+    "If you are in immediate danger, please call 911 or reach out to a local helpline here: https://www.nami.org/help",
+    "If you need professional help reach out to a local helpline here: https://www.nami.org/help"
 ]
 
 trainer = ListTrainer(chatbot)
