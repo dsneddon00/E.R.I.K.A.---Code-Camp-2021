@@ -1,0 +1,41 @@
+.login {
+    min-height: 50vh;
+
+    background-color: rgba(245, 245, 245, 1);
+    color: rgba(0,0,0,1);
+    opacity: .7;
+    font-weight: 630;
+    font-size:17px;
+
+
+  }
+.inputP{
+    color:black; font-weight:500; border-radius:12px;border: 2px solid rgba(0,99,174,255)
+}
+input::placeholder{
+    opacity: 1;
+    font-weight: 600;
+    font-style: bold;
+}
+.bg-image {
+    background-image: url('https://source.unsplash.com/WEQbe2jBg40');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+
+}
+.logo-image {
+    width:240px;
+    
+}
+  
+.login-heading {
+font-weight: 500;
+}
+
+.btn-login {
+font-size: 0.9rem;
+letter-spacing: 0.05rem;
+padding: 0.75rem 1rem;
+}
+  
