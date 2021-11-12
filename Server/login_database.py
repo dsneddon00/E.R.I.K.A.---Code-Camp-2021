@@ -35,12 +35,16 @@ class Database:
         users = self.cursor.fetchall()
         return users
 
+    # return User by looking its IDS
     def getUserByID(self, useID):
         data = [useID]
         self.cursor.execute("SELECT * FROM users WHERE userID = ?", data)
         user = self.cursor.fetchone()
         return user
 
+    # in userName, userPassword
+    # out None(create more than one users or DON'T create any)
+    #      /userID the one just create
     def createUser(self, userName, userPassword):
         old_rowcount = 0
 
@@ -60,6 +64,7 @@ class Database:
             print("No user create this time")
             return None
 
+    # delete user by its userID
     def deleteUser(self, userID):
         data = [userID]
         self.cursor.execute("DELETE FROM users WHERE userID = ?", data)
