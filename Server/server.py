@@ -8,6 +8,27 @@ from passlib.hash import bcrypt
 from http import cookies
 from SessionStore import *
 
+
+##################################
+"""
+
+APIs list:
+
+need login first
+- deleteUser (localhost:8080/users/(userID) method delete) 
+- updateUserName (localhost:8080/users/(userID)/updateName method PUT)
+- updateUserPassword (localhost:8080/users/(userID)/updatePassword method PUT)
+
+- auth (localhost:8080/sessions method POST)
+- logout (localhost:8080/logout method GET)
+- createUser (localhost:8080/users method POST)
+- getAllUser (localhost:8080/users GET)
+- getOneUser (localhost:8080/users/(userID) GET)
+
+
+"""
+##################################
+
 gSessionStore = SessionStore()
 
 
