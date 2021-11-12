@@ -6,6 +6,8 @@ from sqlite3 import Error
 
 dbName = "top_secret.db"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, dbName)
 """
 CREATE TABLE users (
 	userID INTEGER PRIMARY KEY,
@@ -25,7 +27,7 @@ def dict_factory(cursor, row):
 
 class Database:
     def __init__(self):
-        self.connection = sqlite3.connect(dbName)
+        self.connection = sqlite3.connect(db_path)
         self.connection.row_factory = dict_factory
         self.cursor = self.connection.cursor()
         return
@@ -48,6 +50,9 @@ class Database:
     def createUser(self, userName, userPassword):
         old_rowcount = 0
 
+        if len(self.getUserByUserName(userName)) > 0:
+            return -169  # mean this userName already exist
+
         data = [userName, userPassword]
         self.cursor.execute(
             "INSERT INTO users (userName, userPassword) VALUES (?,?)", data)
@@ -69,6 +74,23 @@ class Database:
         data = [userID]
         self.cursor.execute("DELETE FROM users WHERE userID = ?", data)
         self.connection.commit()
+
+    def updateUserName(self, userID, newName):
+        if len(self.getUserByUserName(newName)) == 0:
+            data = [newName, userID]
+            self.cursor.execute(
+                "UPDATE users SET userName = ? WHERE userID = ?", data)
+            self.connection.commit()
+            return self.getUserByID(userID)
+        else:
+            return -169
+
+    def updateUserPassword(self, userID, newPwd):
+        data = [newPwd, userID]
+        self.cursor.execute(
+            "UPDATE users SET userPassword = ? WHERE userID = ?", data)
+        self.connection.commit()
+        return self.getUserByID(userID)
 
     def getUserByUserName(self, name):
         data = [name]
