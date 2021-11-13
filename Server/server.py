@@ -347,10 +347,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         password = parsed_body["userPassword"][0]
 
         db = Database()
-        checkExist = db.getUserByUserName(name)[0]
-
-        if checkExist != None and bcrypt.verify(password, checkExist["userPassword"]):
-            self.sessionData["userID"] = checkExist["userID"]
+        checkExist = db.getUserByUserName(name)
+        
+        if checkExist != None and bcrypt.verify(password, checkExist[0]["userPassword"]):
+            self.sessionData["userID"] = checkExist[0]["userID"]
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
