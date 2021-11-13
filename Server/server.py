@@ -12,21 +12,16 @@ from erikaChatBot import *
 
 ##################################
 """
-
 APIs list:
-
 need login first
 - deleteUser (localhost:8080/users/(userID) method delete)
 - updateUserName (localhost:8080/users/(userID)/updateName method PUT)
 - updateUserPassword (localhost:8080/users/(userID)/updatePassword method PUT)
-
 - auth (localhost:8080/sessions method POST)
 - logout (localhost:8080/logout method GET)
 - createUser (localhost:8080/users method POST)
 - getAllUser (localhost:8080/users GET)
 - getOneUser (localhost:8080/users/(userID) GET)
-
-
 """
 ##################################
 
@@ -105,14 +100,14 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         print("Ok but not content")
         self.send_response(204)
         self.end_headers()
-    
+
 
     def handleNotFound(self):
         self.send_response(404)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
         self.wfile.write(bytes("Not found!", "utf-8"))
-    
+
     ######################################################
     #
     # Auth API
@@ -147,7 +142,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
         db = Database()
         checkExist = db.getUserByUserName(name)
-        
+
         if checkExist != None and bcrypt.verify(password, checkExist[0]["userPassword"]):
             self.sessionData["userID"] = checkExist[0]["userID"]
             self.send_response(200)
@@ -159,11 +154,11 @@ class MyRequestHandler(BaseHTTPRequestHandler):
     #########################################################
     #
     # User APIs:
-    # 
+    #
     def getUserS(self):
         db = Database()
         allUserS = db.getAllUserS()
-    
+
         self.send_response(200)
         self.send_header("Content-type", "application/json")
         self.end_headers()
@@ -227,7 +222,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 print("need userID")
                 self.handle400()
                 return
-            userID = parsed_body["userID"][0]  
+            userID = parsed_body["userID"][0]
 
             try:
                 userID = int(userID)
@@ -327,7 +322,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.handle400()
             print("there is not id")
             return
-        
+
         if "type" not in parsed_body:
             print("need type")
             self.handle400()
@@ -355,8 +350,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not data")
                 return
+              
+            data = dataPart[1].split("&")
 
-            data = dataPart[1].split("&") 
 
             dict = {}
 
@@ -372,6 +368,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not id")
                 return
+              
+            userInput = dict["userInput"]
 
             userInput = dict["userInput"]
 
@@ -380,7 +378,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             if "timeStamp" in dict:
                 timeStamp = dict["timeStamp"]
 
-            # robot = Robot() 
+            # robot = Robot()
             # response = test(userInput)
             response = robot.chat(userInput)
             print(response)
@@ -439,7 +437,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 print("there is not data")
                 return
 
-            data = dataPart[1].split("&") 
+            data = dataPart[1].split("&")
+            
             dict = {}
             for each in data:
                 pair = each.split("=")
@@ -461,7 +460,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not data")
                 return
-            data = dataPart[1].split("&") 
+
+            data = dataPart[1].split("&")
 
             dict = {}
 
@@ -544,3 +544,15 @@ def run():
 
 
 run()
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
