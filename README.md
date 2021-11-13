@@ -1,6 +1,33 @@
 # E.R.I.K.A.---Code-Camp-2021
 E.R.I.K.A (Empathicly Reciprocating Intelligent Konnection Agent) is a web based mental health chat bot.
 
+# let say you are at root dir of the repo
+# haveing
+```
+Client    README.md Server
+```
+
+# Start up the Server
+```
+python3 Server/Server.py
+```
+
+# sqlite Database
+```
+sqlite3 Server/top_secret.db
+
+
+select * from users;
+
+select * from chats;
+```
+
+# for API testing:
+```
+userID: 12
+userName: test1
+userPassword: test1
+```
 
 APIs list:
 # userName has to be UNIQUE

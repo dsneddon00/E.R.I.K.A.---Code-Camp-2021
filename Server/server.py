@@ -183,7 +183,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             userID = int(userID)
         except ValueError:
             # Handle the exception
-            self.handle400
+            self.handle400()
             return
         
         self.getOneUser(userID)
@@ -251,7 +251,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 userID = int(userID)
             except ValueError:
                 # Handle the exception
-                self.handle400
+                self.handle400()
                 return
 
             db = Database()
@@ -342,7 +342,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             userID = int(userID)
         except ValueError:
             # Handle the exception
-            self.handle400
+            self.handle400()
             print("there is not id")
             return
         
@@ -358,7 +358,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.updateUserPwd(userID)
         else:
             print("wrong type name")
-            self.handle400
+            self.handle400()
 
     #######################################################
     #
