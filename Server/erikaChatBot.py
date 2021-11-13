@@ -69,9 +69,38 @@ def inputHandler(bot):
         except(KeyboardInterrupt, EOFError, SystemExit):
             break
 
+################################################
+
+
+def test(text):
+    robot = generateChatBot()
+    response = robot.get_response(text + "\n")
+    return
+
+class Robot:
+    def __init__(self, userID=-1, mode="light"):
+        self.robot = generateChatBot()
+        self.userID = userID
+        self.mode = mode
+    
+    def chat(self, text):
+        response = self.robot.get_response(input(text))
+        print(response)
+
+        if(str(response) == "Changing to dark mode" and self.mode != "dark"):
+                self.mode = "dark"
+        elif(str(response) == "Changing to light mode" and self.mode != "light"):
+                # the bot is confusing light and dark mode
+                self.mode = "light"
+
+        return str(response)
+
+
+####################################################
+
 def run():
     bot = generateChatBot()
     train(bot, DEFAULT_RESPONSE_SET)
     inputHandler(bot)
 
-run()
+# run()
