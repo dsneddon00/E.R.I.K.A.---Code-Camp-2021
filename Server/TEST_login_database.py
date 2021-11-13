@@ -51,6 +51,8 @@ def test_createUser(uName, uPassword):
     userID = db.createUser(uName, uPassword)
     if userID == None:
         print("crateUser() return None it can be NO user created or create more than one users")
+    elif userID == -169:
+        print("This userName already exist")
     else:
         print(f"UserID : {userID} created")
         print(db.getUserByID(userID))
