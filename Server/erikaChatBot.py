@@ -62,7 +62,7 @@ def inputHandler(bot):
             print(response)
             if(str(response) == "Changing to dark mode" and mode != "dark"):
                 mode = "dark"
-            elif(str(response) == "Changing to light mode" and mode != "ligth"):
+            elif(str(response) == "Changing to light mode" and mode != "light"):
                 # the bot is confusing light and dark mode
                 mode = "light"
 
