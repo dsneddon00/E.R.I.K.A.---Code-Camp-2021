@@ -1,0 +1,36 @@
+.login {
+    min-height: 50vh;
+
+    background-color: rgba(245, 245, 245, 1);
+    color: rgba(0,0,0,1);
+    opacity: .7;
+    font-weight: 630;
+    font-size:17px;
+}
+.bg-image {
+    background-image: url('https://source.unsplash.com/WEQbe2jBg40');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+
+}
+.logo-image {
+    width:240px;
+    
+}    
+input.userInput {
+  width: 200px;
+  padding: 5px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 2px solid #8FBC8F;
+  position: relative;
+  left: 123px;
+  bottom: -350px;
+}
+
+div.square {
+  border: solid 1px #8FBC8F;
+  width: 250px;
+  height: 250px;
+  bottom: 150px;
