@@ -64,10 +64,9 @@ registerButton.onclick=function() {
 sendChat.onclick=function() {
   var bot =document.getElementById("#bot")
   var you = document.getElementById("#you")
-  fetch("https://localhost:8080/chat",{
-    method:"POST",
-    credentials: "include",
-  })
-
+  fetch("https://localhost:8080/chat?userID=test65&userInput="+ str(you.value))
+    .then(response => response.json())
+    .then(data => console.log(data))   
+  bot.value = data
 
 }
