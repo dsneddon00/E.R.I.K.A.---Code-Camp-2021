@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap 101 Template</title>
+        <title>E.R.I.K.A chatbot</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+        <script src="https://use.fontawesome.com/02318bb330.js"></script>
+
     </head>
     <div class="container-fluid ps-md-0 bg-image align-items-center">
          
@@ -15,18 +17,89 @@
                     <img src="images/logo2.png" class="logo-image mx-auto">
                 </div>
 
-                <div class="row login pt-5 pb-5 mx-auto" style="width:65%; border-radius:13px">
+                <div class="row chat pb-3 pt-3 mx-auto" style="width:65%; border-radius:13px">
+                    <!-- Chat Box-->
+                    <div class="col-12 px-0">
+                        <div class="px-4 py-4 chat-box bg-white">
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                                <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-black">Hello</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
 
-                        <form>
-                          <input type="text" style="font-family:Ubuntu; border:2px solid rgba(0,99,174,255)" placeholder="Type Here..." class="userInput">  
-                        </form>
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-white">Hello, my name is Erika. How are you feeling today?</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
+
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                                <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-black">It is not great</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
+
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-white">I am your Empathecticly Reciprocating Intelligent Konnection Agent, or Erika for short. Remember, I am not a counselor, but I will do my best to make you feel better.If you are in immediate danger, please call 911 or reach out to a local helpline here: https://www.nami.org/help. If you need professional help reach out to a local helpline here: https://www.nami.org/help. Would you like some tips to relax and reconnect with your body and mind?</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
+
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                                <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-black">Yes</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
+
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                    <p class="text-small mb-0 text-white">Great to hear. One of the first ways to be more connected with yourself to focus on your breath. Take a long, deep breath... As you breath, let your mind be free of repetitive or negative thoughts. How do you feel? A little better or not better</p>
+                                    </div>
+                                    <p class="small text-muted mb-0">12:00 PM | Aug 13</p>
+                                </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Typing area -->
+                            <form action="#" class="bg-light">
+                                <div class="input-group">
+                                <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 pl-4 bg-light">
+                                <div class="input-group-append">
+                                    <button id="button-addon2" type="submit" style="width:75px;" class="btn btn-link"> <i class="fa fa-paper-plane fa-lg"></i></button>
+                                </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
                  </div>
-              <div class="square">
-                <img/>
-              </div>
+        
     </body>
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.1/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </html>
