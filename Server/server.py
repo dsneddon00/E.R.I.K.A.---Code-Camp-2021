@@ -456,8 +456,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
         if collection == "users":
                 self.getUserS()
-        elif collection == "chat":
+        elif collection == "history":
             self.getChatHistory()
+        elif self.path == "/chat":
+            self.chatConversation() 
         elif self.path == "/logout":
             self.logOut()
         else:
@@ -472,8 +474,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.handleAuthenticateUser()
         elif self.path == "/users":
             self.createUser()
-        elif self.path == "/chat":
-            self.chatConversation() 
 
         else:
             print("do_POST not found")

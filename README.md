@@ -39,14 +39,14 @@ APIs list:
 
 ## Users related API
 need login first
-- deleteUser (method delete)
+- deleteUser (DELETE method)
 * localhost:8080/users
 * send URL encoded utf-8 
 * userID : (userID)
 
 ---
 
-- updateUserName (method PUT)
+- updateUserName (PUT method)
 * localhost:8080/users
 * send: URL encoded utf-8
 * userID : (userID)
@@ -56,7 +56,7 @@ need login first
 
 ---
 
-- updateUserPassword (method PUT)
+- updateUserPassword (PUT method)
 * localhost:8080/users 
 * send: URL encoded utf-8 
 * userID : (userID)
@@ -66,7 +66,7 @@ need login first
 
 ---
 
-- auth ( method POST)
+- auth (POST method)
 * localhost:8080/sessions
 * send: URL encoded utf-8     
 * userName : (name) 
@@ -79,7 +79,7 @@ need login first
 
 ---
 
-- createUser ( method POST)
+- createUser (POST method)
 * localhost:8080/users
 * send URL encoded utf-8     
 * userName : (name) 
@@ -100,14 +100,14 @@ need login first
 ## Chat related API
 
 - getChatHistory (GET method)
-* localhost:8080/chat
+* localhost:8080/history
 * send with URL encoded utf-8 
 * userID : (userID)
 * resp: 400(userID can't covert to int or bad or can't find it) 204 (OK but not history found)
 
 ----
 
-- chatConversation (POST method)
+- chatConversation (GET method)
 * localhost:8080/chat
 * send with URL encoded utf-8 
 * userID : (userID)
