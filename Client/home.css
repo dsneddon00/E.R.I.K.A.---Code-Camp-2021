@@ -1,0 +1,33 @@
+.login {
+    min-height: 50vh;
+
+    background-color: rgba(245, 245, 245, 1);
+    color: rgba(0,0,0,1);
+    opacity: .7;
+    font-weight: 630;
+    font-size:17px;
+}
+.bg-image {
+    background-image: url('https://source.unsplash.com/WEQbe2jBg40');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+
+}
+.logo-image {
+    width:240px;
+    
+}
+
+.button {
+  background: transparent;
+  border: none;
+  color: black;
+  padding: 10px;
+  margin-left: 1050px;
+  margin-top: -400px;
+  text-align: center;
+  font-size: 16px;
+}
+
+
