@@ -41,7 +41,7 @@ APIs list:
 need login first
 - deleteUser (DELETE method)
 * localhost:8080/users
-* send URL encoded utf-8 
+* send URL encoded utf-8
 * userID : (userID)
 
 ---
@@ -57,8 +57,8 @@ need login first
 ---
 
 - updateUserPassword (PUT method)
-* localhost:8080/users 
-* send: URL encoded utf-8 
+* localhost:8080/users
+* send: URL encoded utf-8
 * userID : (userID)
 * type : updatePassword (HAVE TO HARD CODE)
 * updatePassword : (the new pwd)
@@ -69,7 +69,7 @@ need login first
 - auth (POST method)
 * localhost:8080/sessions
 * send: URL encoded utf-8     
-* userName : (name) 
+* userName : (name)
 * userPassword : (pwd)
 * resp: 400(missing userName or pwd) | 401 (not found) | 200 (OK)
 
@@ -82,7 +82,7 @@ need login first
 - createUser (POST method)
 * localhost:8080/users
 * send URL encoded utf-8     
-* userName : (name) 
+* userName : (name)
 * userPassword : (pwd)
 * resp: 400(name is existed try a new one) | 401 (not found) | 201 (OK)
 
@@ -90,8 +90,13 @@ need login first
 
 - getAllUser (GET method)
 * localhost:8080/users
-* send with URL encoded utf-8 
-* userID : (userID or "*")  * mean getALL else get the matched userID one
+* resp: 400(userID can't covert to int or bad) | the Users list
+
+---
+
+- getOneUser (GET method)
+* localhost:8080/user?userID=(userID)
+* http://localhost:8080/user?userID=12
 * resp: 400(userID can't covert to int or bad)
 
 ---
@@ -100,17 +105,14 @@ need login first
 ## Chat related API
 
 - getChatHistory (GET method)
-* localhost:8080/history
-* send with URL encoded utf-8 
-* userID : (userID)
+* localhost:8080/history?userID=(userID)
+* http://localhost:8080/history?userID=12
 * resp: 400(userID can't covert to int or bad or can't find it) 204 (OK but not history found)
 
 ----
 
 - chatConversation (GET method)
-* localhost:8080/chat
-* send with URL encoded utf-8 
-* userID : (userID)
-* userInput : (userInput)
-* timeStamp : (timeStamp OPTIONAL)
+* localhost:8080/chat/?userID=(userID)&userInput=(userInput)&timeStamp=(timeStamp)
+> http://localhost:8080/chat?userID=12&userInput=hi
+* (timeStamp OPTIONAL)
 * resp: 400(userID can't covert to int or bad or can't find it) 200 (OK)
