@@ -2,7 +2,6 @@
 // var registerButton = document.querySelector("#btn-register");
 var sendChat = document.querySelector("#button-addon2")
 
-
 // signInButton.onclick=function() {
 
 //   var email = document.querySelector("#floatingInput").value;
