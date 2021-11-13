@@ -112,7 +112,7 @@ need login first
 ----
 
 - chatConversation (GET method)
-* localhost:8080/chat/?userID=(userID)&userInput=(userInput)&timeStamp=(timeStamp)
+* localhost:8080/chat?userID=(userID)&userInput=(userInput)&timeStamp=(timeStamp)
 > http://localhost:8080/chat?userID=12&userInput=hi
 * (timeStamp OPTIONAL)
 * resp: 400(userID can't covert to int or bad or can't find it) 200 (OK)
