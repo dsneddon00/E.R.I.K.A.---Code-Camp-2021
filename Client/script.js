@@ -2,6 +2,7 @@
 
 var signInButton = document.querySelector("#btn-sign-in");
 var registerButton = document.querySelector("#btn-register");
+var sendChat = document.querySelector("#button-addon2")
 
 
 signInButton.onclick=function() {
@@ -57,5 +58,16 @@ registerButton.onclick=function() {
       alert("Try again " + String(response.status))
     }
   });
+
+  
+}
+sendChat.onclick=function() {
+  var bot =document.getElementById("#bot")
+  var you = document.getElementById("#you")
+  fetch("https://localhost:8080/chat",{
+    method:"POST",
+    credentials: "include",
+  })
+
 
 }
