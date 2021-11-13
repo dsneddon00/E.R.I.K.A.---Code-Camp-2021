@@ -3,7 +3,7 @@ var registerButton = document.querySelector("#btn-register");
 
 
 
-signInButton.onclick=function() {
+signInButton.onclick = function () {
 
   var email = document.querySelector("#floatingInput").value;
   var password = document.querySelector("#floatingPassword").value;
@@ -15,12 +15,13 @@ signInButton.onclick=function() {
     credentials: "include",
     body: body,
     headers: {
-      "Content-Type":"application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded"
     }
-  }).then(function(response) {
+  }).then(function (response) {
     console.log("Server responded to POST request")
 
-    if(response.status == 200) {
+    if (response.status == 200) {
+      console.log(response)
       alert('Sucessfully signed in: ' + email);
     } else if (response.status == 401) {
       alert('Failed to sign in')
@@ -31,7 +32,7 @@ signInButton.onclick=function() {
 
 }
 
-registerButton.onclick = function() {
+registerButton.onclick = function () {
   var email = document.querySelector("#floatingInput").value;
   var password = document.querySelector("#floatingPassword").value;
   var data = "userName=" + encodeURIComponent(email);
@@ -42,12 +43,12 @@ registerButton.onclick = function() {
     credentials: "include",
     body: data,
     headers: {
-      "Content-Type":"application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded"
     }
-  }).then(function(response) {
+  }).then(function (response) {
     console.log("Server responded to POST request")
 
-    if(response.status == 201) {
+    if (response.status == 201) {
       alert('Sucessful Registration');
     } else if (response.status == 401) {
       alert('Email Taken')

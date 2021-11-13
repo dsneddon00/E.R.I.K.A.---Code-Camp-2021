@@ -1,13 +1,40 @@
 var sendChat = document.querySelector("#button-addon2")
 
-sendChat.onclick = function() {
-  var you = document.querySelector("#you").value
+var userID = 12
+
+/*
+sendChat.onclick = function () {
+  var you = document.querySelector("#you").value;
   var bot = document.querySelector("#bot")
-  fetch("https://localhost:8080/chat?userID=test65&userInput="+ you)
+  fetch("https://localhost:8080/chat?userID=test65&userInput=" + you)
     .then(response => response.json())
     .then(data => console.log(data))
   bot.value = data
   console.log(data)
+}
+*/
+
+sendChat.onclick = function () {
+  var userText = document.querySelector("#you").value;
+  console.log("This is user input: ", userText);
+  sendNewChat(userText);
+}
+
+function sendNewChat(userText) {
+  var url = new URL("http://localhost:8080/chat");
+  url.searchParams.set('userID', userID);
+  url.searchParams.set('userInput', userText);
+  console.log("This is url: ", url)
+
+  fetch(url, {
+    method: "GET",
+    credentials: "include"
+  }).then(function (response) {
+    console.log("Server responded to GET chat request")
+
+
+  })
+
 }
 
 // send chat
