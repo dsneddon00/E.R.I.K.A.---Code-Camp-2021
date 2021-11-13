@@ -2,9 +2,9 @@
 E.R.I.K.A (Empathicly Reciprocating Intelligent Konnection Agent) is a web based mental health chat bot.
 
 # let say you are at root dir of the repo
-# haveing
+# having
 ```
-Client    README.md Server
+Client  README.md  Server
 ```
 
 # Start up the Server
