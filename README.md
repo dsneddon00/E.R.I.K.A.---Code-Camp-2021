@@ -112,4 +112,5 @@ need login first
 * send with URL encoded utf-8 
 * userID : (userID)
 * userInput : (userInput)
+* timeStamp : (timeStamp OPTIONAL)
 * resp: 400(userID can't covert to int or bad or can't find it) 200 (OK)
