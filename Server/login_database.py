@@ -137,7 +137,7 @@ class Database:
 
     def storeChat(self, userID, input, response):
         # robot = Robot() 
-         # response = robot.chat(input)
+        # response = robot.chat(input)
 
         data = [input, response, userID]
 
@@ -157,7 +157,3 @@ class Database:
         elif new_rowcount == old_rowcount:
             print("No new chat history stored this time")
             return None
-        
-        return response
-
-

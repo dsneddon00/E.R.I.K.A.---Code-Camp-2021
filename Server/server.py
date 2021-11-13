@@ -393,7 +393,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             print(response)
 
             db = Database()
-            response = db.storeChat(userID, userInput, response)
+            db.storeChat(userID, userInput, response)
 
             self.send_response(200)
             self.send_header("Content-type", "application/json")
