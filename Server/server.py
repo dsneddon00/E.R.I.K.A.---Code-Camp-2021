@@ -15,7 +15,7 @@ from SessionStore import *
 APIs list:
 
 need login first
-- deleteUser (localhost:8080/users/(userID) method delete) 
+- deleteUser (localhost:8080/users/(userID) method delete)
 - updateUserName (localhost:8080/users/(userID)/updateName method PUT)
 - updateUserPassword (localhost:8080/users/(userID)/updatePassword method PUT)
 
@@ -131,7 +131,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         # print("The request body: ", request_body)
 
         parsed_body = parse_qs(request_body)
-        # print("the parsed body:", parsed_body)
+        print("the parsed body:", parsed_body)
 
         userName = parsed_body['userName'][0]
         userPassword = parsed_body['userPassword'][0]
@@ -141,7 +141,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         userID = db.createUser(userName, hashed)
         if userID != None:
             if userID == -169:
-                print(f"userName {userName} is existed try a new one")
+                print("userName {userName} is existed try a new one")
                 self.handle400()
             else:
                 self.handle201()
