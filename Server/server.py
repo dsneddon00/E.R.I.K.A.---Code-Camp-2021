@@ -458,9 +458,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.getUserS()
         elif collection == "history":
             self.getChatHistory()
-        elif self.path == "/chat":
+        elif collection == "chat":
             self.chatConversation() 
-        elif self.path == "/logout":
+        elif collection == "logout":
             self.logOut()
         else:
             print("do_GET not found")
