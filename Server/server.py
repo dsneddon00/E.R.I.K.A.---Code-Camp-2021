@@ -213,96 +213,89 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.handleNotFound()
 
     def deleteUser(self):
-        if self.isLogin():
+        length = int(self.headers["Content-Length"])
+        request_body = self.rfile.read(length).decode("utf-8")
+        parsed_body = parse_qs(request_body)
+
+        if "userID" not in parsed_body:
+            print("need userID")
+            self.handle400()
+            return
+        userID = parsed_body["userID"][0]
+
+        try:
+            userID = int(userID)
+        except ValueError:
+            # Handle the exception
+            self.handle400()
+            return
+
+        db = Database()
+        userRecord = db.getUserByID(userID)
+        if userRecord != None:
+            db.deleteUser(userID)
+
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+
+            self.wfile.write(bytes(json.dumps(userRecord), "utf-8"))
+        else:
+            print("User not found")
+            self.handleNotFound()
+
+    def updateUserName(self, userID):
+        db = Database()
+        userRecord = db.getUserByID(userID)
+        if userRecord != None:
             length = int(self.headers["Content-Length"])
             request_body = self.rfile.read(length).decode("utf-8")
             parsed_body = parse_qs(request_body)
 
-            if "userID" not in parsed_body:
-                print("need userID")
+            if "updateName" not in parsed_body:
+                print("need updateName")
                 self.handle400()
                 return
-            userID = parsed_body["userID"][0]
+            newName = parsed_body["updateName"][0]
 
-            try:
-                userID = int(userID)
-            except ValueError:
-                # Handle the exception
-                self.handle400()
-                return
-
-            db = Database()
-            userRecord = db.getUserByID(userID)
-            if userRecord != None:
-                db.deleteUser(userID)
-
+            user = db.updateUserName(userID, newName)
+            if user != -169:
                 self.send_response(200)
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
-
-                self.wfile.write(bytes(json.dumps(userRecord), "utf-8"))
             else:
-                print("User not found")
-                self.handleNotFound()
+                print("updateName: name is existed")
+                self.handle400()
         else:
-            self.handle401()
+            print("User not found")
+            self.handleNotFound()
 
-    def updateUserName(self, userID):
-        if self.isLogin():
-            db = Database()
-            userRecord = db.getUserByID(userID)
-            if userRecord != None:
-                length = int(self.headers["Content-Length"])
-                request_body = self.rfile.read(length).decode("utf-8")
-                parsed_body = parse_qs(request_body)
-
-                if "updateName" not in parsed_body:
-                    print("need updateName")
-                    self.handle400()
-                    return
-                newName = parsed_body["updateName"][0]
-
-                user = db.updateUserName(userID, newName)
-                if user != -169:
-                    self.send_response(200)
-                    self.send_header("Content-type", "application/json")
-                    self.end_headers()
-                else:
-                    print("updateName: name is existed")
-                    self.handle400()
-            else:
-                print("User not found")
-                self.handleNotFound()
-        else:
-            self.handle401()
 
     def updateUserPwd(self, userID):
-        if self.isLogin():
-            db = Database()
-            userRecord = db.getUserByID(userID)
-            if userRecord != None:
-                length = int(self.headers["Content-Length"])
-                request_body = self.rfile.read(length).decode("utf-8")
-                parsed_body = parse_qs(request_body)
+        db = Database()
+        userRecord = db.getUserByID(userID)
+        if userRecord != None:
+            length = int(self.headers["Content-Length"])
+            request_body = self.rfile.read(length).decode("utf-8")
+            parsed_body = parse_qs(request_body)
 
-                if "updatePassword" not in parsed_body:
-                    print("need updatePassword")
-                    self.handle400()
-                    return
-                newPwd = parsed_body["updatePassword"][0]
+            if "updatePassword" not in parsed_body:
+                print("need updatePassword")
+                self.handle400()
+                return
+            newPwd = parsed_body["updatePassword"][0]
 
-                hashed = bcrypt.hash(newPwd)
+            hashed = bcrypt.hash(newPwd)
 
-                user = db.updateUserPassword(userID, hashed)
-                self.send_response(200)
-                self.send_header("Content-type", "application/json")
-                self.end_headers()
+            user = db.updateUserPassword(userID, hashed)
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
 
-            else:
-                print("User not found")
-                self.handleNotFound()
         else:
-            self.handle401()
+            print("User not found")
+            self.handleNotFound()
+
 
     def update(self):
         length = int(self.headers["Content-Length"])
@@ -343,71 +336,64 @@ class MyRequestHandler(BaseHTTPRequestHandler):
     #
 
     def chatConversation(self):
-        if self.isLogin():
-            if len(self.path.split("?")) > 1:
-                dataPart = self.path.split("?")
-            else:
-                self.handle400()
-                print("there is not data")
-                return
-              
-            data = dataPart[1].split("&")
-
-
-            dict = {}
-
-            for each in data:
-                pair = each.split("=")
-                dict[pair[0]] = pair[1]
-            # print(dict)
-
-            try:
-                userID = int(dict["userID"])
-            except ValueError:
-                # Handle the exception
-                self.handle400()
-                print("there is not id")
-                return
-              
-            userInput = dict["userInput"]
-
-            userInput = dict["userInput"]
-
+        if len(self.path.split("?")) > 1:
+            dataPart = self.path.split("?")
+        else:
+            self.handle400()
+            print("there is not data")
+            return
             
-            timeStamp = "null"
-            if "timeStamp" in dict:
-                timeStamp = dict["timeStamp"]
+        data = dataPart[1].split("&")
 
-            # robot = Robot()
-            # response = test(userInput)
-            response = robot.chat(userInput)
-            print(response)
 
-            db = Database()
-            db.storeChat(userID, userInput, response, timeStamp)
+        dict = {}
 
+        for each in data:
+            pair = each.split("=")
+            dict[pair[0]] = pair[1]
+        # print(dict)
+
+        try:
+            userID = int(dict["userID"])
+        except ValueError:
+            # Handle the exception
+            self.handle400()
+            print("there is not id")
+            return
+            
+        userInput = dict["userInput"]
+
+        userInput = dict["userInput"]
+
+        
+        timeStamp = "null"
+        if "timeStamp" in dict:
+            timeStamp = dict["timeStamp"]
+
+        # robot = Robot()
+        # response = test(userInput)
+        response = robot.chat(userInput)
+        print(response)
+
+        db = Database()
+        db.storeChat(userID, userInput, response, timeStamp)
+
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(bytes(json.dumps(response), "utf-8"))
+    
+
+    def getChatHistory(self, userID):
+        db = Database()
+        history = db.getChatHistory(userID)
+        if history == None:
+            self.handle204()
+        else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(json.dumps(response), "utf-8"))
-        else:
-            self.handle401()
-
-    def getChatHistory(self, userID):
-        if self.isLogin():
-            db = Database()
-            history = db.getChatHistory(userID)
-            if history == None:
-                self.handle204()
-            else:
-                self.send_response(200)
-                self.send_header("Content-type", "application/json")
-                self.end_headers()
-                self.wfile.write(bytes(json.dumps(history), "utf-8"))
-
-        else:
-            self.handle401()
-
+            self.wfile.write(bytes(json.dumps(history), "utf-8"))
 
     ##################################################
 
