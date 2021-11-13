@@ -32,7 +32,7 @@ need login first
 
 gSessionStore = SessionStore()
 
-# robot = Robot()
+robot = Robot()
 
 
 class MyRequestHandler(BaseHTTPRequestHandler):
@@ -388,7 +388,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             userID = parsed_body["userID"][0]
 
             # robot = Robot() 
-            response = test(userInput)
+            # response = test(userInput)
+            response = robot.chat(userInput)
             print(response)
 
             db = Database()

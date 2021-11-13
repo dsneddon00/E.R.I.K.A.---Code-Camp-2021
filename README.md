@@ -22,6 +22,11 @@ select * from users;
 select * from chats;
 ```
 
+# REMOVE erikaTraining.sqlite3 everytime rerun the robot
+```
+rm Server/erikaTraining.sqlite3
+```
+
 # for API testing:
 ```
 userID: 12
