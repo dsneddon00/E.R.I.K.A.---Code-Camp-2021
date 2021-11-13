@@ -157,4 +157,28 @@ def run():
     train(bot)
     inputHandler(bot)
 
-run()
+# run()
+
+################################################
+
+class Robot:
+    def __init__(self, userID=-1, mode="light"):
+        self.robot = generateChatBot()
+        train(self.robot)
+        self.userID = userID
+        self.mode = mode
+    
+    def chat(self, text):
+        response = self.robot.get_response(text)
+        # print(response)
+
+        if(str(response) == "Changing to dark mode" and self.mode != "dark"):
+                self.mode = "dark"
+        elif(str(response) == "Changing to light mode" and self.mode != "light"):
+                # the bot is confusing light and dark mode
+                self.mode = "light"
+
+        return str(response)
+
+
+####################################################
