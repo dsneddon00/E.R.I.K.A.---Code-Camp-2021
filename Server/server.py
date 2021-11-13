@@ -350,8 +350,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not data")
                 return
-
+              
             data = dataPart[1].split("&")
+
 
             dict = {}
 
@@ -367,10 +368,12 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not id")
                 return
+              
+            userInput = dict["userInput"]
 
             userInput = dict["userInput"]
 
-
+            
             timeStamp = "null"
             if "timeStamp" in dict:
                 timeStamp = dict["timeStamp"]
@@ -435,6 +438,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 return
 
             data = dataPart[1].split("&")
+            
             dict = {}
             for each in data:
                 pair = each.split("=")
@@ -456,6 +460,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 self.handle400()
                 print("there is not data")
                 return
+
             data = dataPart[1].split("&")
 
             dict = {}
