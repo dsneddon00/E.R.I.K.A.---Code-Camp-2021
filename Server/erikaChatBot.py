@@ -124,31 +124,31 @@ def train(bot):
         "Intense",
         "How about picking up some weights? Lifting weights can build muscle, burn body fat, and even strengthen your joints."
     ])
-    train.train([
+    trainer.train([
         "Moderate",
         "Would you perhaps enjoy a job around the neighborhood? It can help you lose weight, strengthen your muscles, improve your cardiovascular fitness, and even give you a new perspective on life!"
     ])
-    train.train([
+    trainer.train([
         "Relaxed",
         "Maybe every morning you can talk a walk around the block? If you have a dog, it might be even easier. I do love dogs personally, but what do you prefer? Dogs or cats?"
     ])
-    train.train([
+    trainer.train([
         "Dogs",
         "Fun fact about dogs, they are really well known for their high emotional intelligence. Some can even detect how their owner feels as well. But how are you feeling right now? Good, bad, or Neutral?"
     ])
-    train.train([
+    trainer.train([
         "Cats",
         "Did you know that cats, unlike dogs, are known for their high logical intelligence and problem solving skills? Maybe if they worked hard enough they could help my friends who made me! Speaking of friends, how many close friends do you have? A few close friends? Lots of close friends? A little lonely?"
     ])
-    train.train([
+    trainer.train([
         "Lots of close friends",
         "That's fantastic! It's really awesome to be surrounded by people that support you and want what is best for you!"
     ])
-    train.train([
+    trainer.train([
         "A few close friends",
         "Sometimes, having just a few people you can be in touch with makes all the difference."
     ])
-    train.train([
+    trainer.train([
         "A little lonely",
         "I'm sorry to hear that, it can be tough to make friends sometimes."
     ])
