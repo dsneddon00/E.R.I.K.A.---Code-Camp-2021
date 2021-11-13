@@ -387,19 +387,22 @@ class MyRequestHandler(BaseHTTPRequestHandler):
                 return
             userID = parsed_body["userID"][0]
 
+            timeStamp = "null"
+            if "timeStamp" in parsed_body:
+                timeStamp = parsed_body["timeStamp"][0]
+
             # robot = Robot() 
             # response = test(userInput)
             response = robot.chat(userInput)
             print(response)
 
             db = Database()
-            db.storeChat(userID, userInput, response)
+            db.storeChat(userID, userInput, response, timeStamp)
 
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(json.dumps(response), "utf-8"))
-
         else:
             self.handle401()
 

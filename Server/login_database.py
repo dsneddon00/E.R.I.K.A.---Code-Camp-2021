@@ -14,7 +14,7 @@ db_path = os.path.join(BASE_DIR, dbName)
 os.makedirs(BASE_DIR, exist_ok=True)
 db = sqlite3.connect(db_path)
 db.execute('CREATE TABLE IF NOT EXISTS users(userID INTEGER PRIMARY KEY, userName TEXT NOT NULL, userPassword TEXT NOT NULL)')
-db.execute('CREATE TABLE IF NOT EXISTS chats(chatID INTEGER PRIMARY KEY, input TEXT, response TEXT, userID INTEGER, FOREIGN KEY(userID) REFERENCES users(userID))')
+db.execute('CREATE TABLE IF NOT EXISTS chats(chatID INTEGER PRIMARY KEY, input TEXT, response TEXT, userID INTEGER, timeStamp TEXT, FOREIGN KEY(userID) REFERENCES users(userID))')
 db.close()
 
 """
@@ -135,16 +135,16 @@ class Database:
         else:
             return history
 
-    def storeChat(self, userID, input, response):
+    def storeChat(self, userID, input, response, timeStamp):
         # robot = Robot() 
         # response = robot.chat(input)
 
-        data = [input, response, userID]
+        data = [input, response, userID, timeStamp]
 
         old_rowcount = 0
 
         self.cursor.execute(
-            "INSERT INTO chats (input, response, userID) VALUES (?,?,?)", data)
+            "INSERT INTO chats (input, response, userID, timeStamp) VALUES (?,?,?,?)", data)
         self.connection.commit()
         new_rowcount = self.cursor.rowcount
 
