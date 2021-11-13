@@ -161,32 +161,14 @@ class MyRequestHandler(BaseHTTPRequestHandler):
     # User APIs:
     # 
     def getUserS(self):
-        length = int(self.headers["Content-Length"])
-        request_body = self.rfile.read(length).decode("utf-8")
-        parsed_body = parse_qs(request_body)
+        db = Database()
+        allUserS = db.getAllUserS()
+    
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
 
-        if "userID" not in parsed_body:
-            self.handle400()
-            return
-        userID = parsed_body["userID"][0]
-
-        if userID == "*":
-            self.send_response(200)
-            self.send_header("Content-type", "appliction/json")
-            self.end_headers()
-
-            db = Database()
-            allUserS = db.getAllUserS()
-            self.wfile.write(bytes(json.dumps(allUserS), "utf-8"))
-
-        try:
-            userID = int(userID)
-        except ValueError:
-            # Handle the exception
-            self.handle400()
-            return
-        
-        self.getOneUser(userID)
+        self.wfile.write(bytes(json.dumps(allUserS), "utf-8"))
 
     def createUser(self):
         length = int(self.headers["Content-Length"])
@@ -367,29 +349,36 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
     def chatConversation(self):
         if self.isLogin():
-            length = int(self.headers["Content-Length"])
-
-            request_body = self.rfile.read(length).decode("utf-8")
-            # print("The request body: ", request_body)
-
-            parsed_body = parse_qs(request_body)
-            print("the parsed body:", parsed_body)
-
-            if "userInput" not in parsed_body:
-                print("need userInput")
+            if len(self.path.split("?")) > 1:
+                dataPart = self.path.split("?")
+            else:
                 self.handle400()
+                print("there is not data")
                 return
-            userInput = parsed_body["userInput"][0]
 
-            if "userID" not in parsed_body:
-                print("need userID")
+            data = dataPart[1].split("&") 
+
+            dict = {}
+
+            for each in data:
+                pair = each.split("=")
+                dict[pair[0]] = pair[1]
+            # print(dict)
+
+            try:
+                userID = int(dict["userID"])
+            except ValueError:
+                # Handle the exception
                 self.handle400()
+                print("there is not id")
                 return
-            userID = parsed_body["userID"][0]
 
+            userInput = dict["userInput"]
+
+            
             timeStamp = "null"
-            if "timeStamp" in parsed_body:
-                timeStamp = parsed_body["timeStamp"][0]
+            if "timeStamp" in dict:
+                timeStamp = dict["timeStamp"]
 
             # robot = Robot() 
             # response = test(userInput)
@@ -406,22 +395,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         else:
             self.handle401()
 
-    def getChatHistory(self):
+    def getChatHistory(self, userID):
         if self.isLogin():
-            length = int(self.headers["Content-Length"])
-
-            request_body = self.rfile.read(length).decode("utf-8")
-            # print("The request body: ", request_body)
-
-            parsed_body = parse_qs(request_body)
-            print("the parsed body:", parsed_body)
-
-            if "userID" not in parsed_body:
-                print("need userID")
-                self.handle400()
-                return
-            userID = parsed_body["userID"][0]
-
             db = Database()
             history = db.getChatHistory(userID)
             if history == None:
@@ -455,12 +430,59 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         collection = path_parts[1]
 
         if collection == "users":
-                self.getUserS()
-        elif collection == "history":
-            self.getChatHistory()
-        elif collection == "chat":
-            self.chatConversation() 
-        elif collection == "logout":
+            self.getUserS()
+        elif collection.split("?")[0] == "user":
+            if len(self.path.split("?")) > 1:
+                dataPart = self.path.split("?")
+            else:
+                self.handle400()
+                print("there is not data")
+                return
+
+            data = dataPart[1].split("&") 
+            dict = {}
+            for each in data:
+                pair = each.split("=")
+                dict[pair[0]] = pair[1]
+            # print(dict)
+            try:
+                userID = int(dict["userID"])
+            except ValueError:
+                # Handle the exception
+                self.handle400()
+                print("there is not id")
+                return
+            self.getOneUser(userID)
+
+        elif collection.split("?")[0] == "history":
+            if len(self.path.split("?")) > 1:
+                dataPart = self.path.split("?")
+            else:
+                self.handle400()
+                print("there is not data")
+                return
+            data = dataPart[1].split("&") 
+
+            dict = {}
+
+            for each in data:
+                pair = each.split("=")
+                dict[pair[0]] = pair[1]
+            # print(dict)
+
+            try:
+                userID = int(dict["userID"])
+            except ValueError:
+                # Handle the exception
+                self.handle400()
+                print("there is not id")
+                return
+            self.getChatHistory(userID)
+
+        elif "chat" == collection.split("?")[0] :
+            self.chatConversation()
+
+        elif self.path == "/logout":
             self.logOut()
         else:
             print("do_GET not found")
