@@ -43,7 +43,7 @@ def generateChatBot():
                 "default_response": "I am sorry, but I do not understand what you are saying.",
                 "maximum_similarity_threshold": 0.90
             },
-            
+
 
         ]
     )
@@ -55,14 +55,14 @@ def train(bot):
         "Hi",
         "Hello, my name is Erika. How are you feeling today?",
         "I am doing fine",
-        "Is everything going well in your life?"    
+        "Is everything going well in your life?"
     ])
     trainer.train([
         "Hello",
-        "Hello, my name is Erika. How are you feeling today? Neutral,good,bad?" ,
+        "Hello, my name is Erika. How are you feeling today? Neutral, good, bad?" ,
     ])
     trainer.train([
-        "good",
+        "Good",
         "Great. Is everything going well in your life?"
     ])
     trainer.train([
@@ -70,7 +70,7 @@ def train(bot):
         "I'm sorry to hear. Is everything going well in your life?"
     ])
     trainer.train([
-        "neutral",
+        "Neutral",
         "Is everything going well in your life?"
     ])
     trainer.train([
@@ -88,7 +88,7 @@ def train(bot):
         "Good job. Let's try another exercise. It's called the Body scan. This technique is to help relax the muscles in your body. Continue your breath focus and go from muscle to muscle on your body releasing physical tension in that muscle. It's all about being aware of the mind and body connection. After let me know, Have you released any tension in the body? Less tension or the same tension",
     ])
     trainer.train([
-        "Same tension", 
+        "Same tension",
         "I'm sorry to hear that. Let's try another technique and see if it helps. It's called guided imagery. I would like you to close your eyes and think of a calm place or a place you would find peace. Think of a scene that you personally relate to and let your mind wander in that place. Let me know how are you feeling after.. I'll wait here. Better, worse, same?",
     ])
     trainer.train([
@@ -106,7 +106,7 @@ def train(bot):
     trainer.train([
         "Same",
         "It's okay to feel about the same. But let's try to dig a little deeper to understand what can help. Do have days that you feel depressed, anxious, or both? "
-    ]) 
+    ])
     trainer.train([
         "Depressed",
         "There's a lot of people that deal with depression. You are not alone. You can get through this and find ways to cope. Let's talk about it.\n  Are you active or not active"
@@ -118,6 +118,39 @@ def train(bot):
     ])
     trainer.train([
         "Not active",
+        "How about we consider adding some activity into your daily routine? How intense would you like your work to be? Intense, moderate, or relaxed?"
+    ])
+    trainer.train([
+        "Intense",
+        "How about picking up some weights? Lifting weights can build muscle, burn body fat, and even strengthen your joints."
+    ])
+    train.train([
+        "Moderate",
+        "Would you perhaps enjoy a job around the neighborhood? It can help you lose weight, strengthen your muscles, improve your cardiovascular fitness, and even give you a new perspective on life!"
+    ])
+    train.train([
+        "Relaxed",
+        "Maybe every morning you can talk a walk around the block? If you have a dog, it might be even easier. I do love dogs personally, but what do you prefer? Dogs or cats?"
+    ])
+    train.train([
+        "Dogs",
+        "Fun fact about dogs, they are really well known for their high emotional intelligence. Some can even detect how their owner feels as well. But how are you feeling right now? Good, bad, or Neutral?"
+    ])
+    train.train([
+        "Cats",
+        "Did you know that cats, unlike dogs, are known for their high logical intelligence and problem solving skills? Maybe if they worked hard enough they could help my friends who made me! Speaking of friends, how many close friends do you have? A few close friends? Lots of close friends? A little lonely?"
+    ])
+    train.train([
+        "Lots of close friends",
+        "That's fantastic! It's really awesome to be surrounded by people that support you and want what is best for you!"
+    ])
+    train.train([
+        "A few close friends",
+        "Sometimes, having just a few people you can be in touch with makes all the difference."
+    ])
+    train.train([
+        "A little lonely",
+        "I'm sorry to hear that, it can be tough to make friends sometimes."
     ])
     trainer.train([
         "Anxious",
@@ -131,10 +164,10 @@ def train(bot):
         "Bye",
         "Thanks for talking. If you need professional help reach out to a local helpline here: https://www.nami.org/help. You are not alone. Come back anytime"
     ])
-  
 
-  
- 
+
+
+
 
 def inputHandler(bot):
     # find a way to send the mode up to the server
@@ -167,7 +200,7 @@ class Robot:
         train(self.robot)
         self.userID = userID
         self.mode = mode
-    
+
     def chat(self, text):
         response = self.robot.get_response(text)
         # print(response)
