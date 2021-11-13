@@ -131,6 +131,10 @@ def train(bot):
         "Bye",
         "Thanks for talking. If you need professional help reach out to a local helpline here: https://www.nami.org/help. You are not alone. Come back anytime"
     ])
+  
+
+  
+ 
 
 def inputHandler(bot):
     # find a way to send the mode up to the server
@@ -147,6 +151,13 @@ def inputHandler(bot):
 
         except(KeyboardInterrupt, EOFError, SystemExit):
             break
+
+def run():
+    bot = generateChatBot()
+    train(bot)
+    inputHandler(bot)
+
+# run()
 
 ################################################
 
@@ -171,10 +182,3 @@ class Robot:
 
 
 ####################################################
-
-def run():
-    bot = generateChatBot()
-    train(bot, DEFAULT_RESPONSE_SET)
-    inputHandler(bot)
-
-# run()
