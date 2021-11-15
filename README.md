@@ -1,6 +1,8 @@
 # E.R.I.K.A.---Code-Camp-2021
 E.R.I.K.A (Empathicly Reciprocating Intelligent Konnection Agent) is a web based mental health chat bot.
 
+# [E.R.I.K.A---Flask-Edition](https://github.com/dsneddon00/E.R.I.K.A---Flask-Edition)
+
 # let say you are at root dir of the repo
 # having
 ```
